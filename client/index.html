@@ -22,14 +22,17 @@
     fetch(svgPath)
       .then(response => response.text())
       .then(svgText => {
-        svgContainer.innerHTML = svgText;
-        const svgDoc = svgContainer.getElementsByTagName('svg')[0];
-        const card = svgDoc.getElementById(cardID);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(svgText, 'image/svg+xml');
+        svgContainer.appendChild(doc.documentElement);
+        const card = svgContainer.querySelector(`#${cardID}`);
         card.style.display = 'inline';
       })
       .catch(error => console.error('Failed to load SVG:', error));
   </script>
 </body>
 </html>
+
+
 
 
