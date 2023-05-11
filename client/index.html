@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SVG Cards</title>
+  <style>
+    .card {
+      display: none;
+      width: 100px;
+      height: 150px;
+    }
+  </style>
+</head>
+<body>
+  <div id="svgContainer"></div>
+
+  <script>
+    const svgContainer = document.getElementById('svgContainer');
+    const svgPath = './public/SVG-cards-2.0.1/svg-cards.svg';
+    const cardID = 'queen_club';
+
+    fetch(svgPath)
+      .then(response => response.text())
+      .then(svgText => {
+        svgContainer.innerHTML = svgText;
+        const svgDoc = svgContainer.getElementsByTagName('svg')[0];
+        const card = svgDoc.getElementById(cardID);
+        card.style.display = 'inline';
+      })
+      .catch(error => console.error('Failed to load SVG:', error));
+  </script>
+</body>
+</html>
+
+
